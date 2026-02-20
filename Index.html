@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodePeregrine LLC — Mobile App Development</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0d0c;
+      --paper: #f4f1ec;
+      --warm: #faf9f6;
+      --accent: #c8501a;
+      --muted: #7a7870;
+      --border: #ddd9d2;
+      --gap: clamp(3rem, 6vw, 6rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem clamp(1.5rem, 6vw, 5rem);
+      background: rgba(244,241,236,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
+    .logo svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .logo-text { font-family: 'Courier New', monospace; font-size: 0.88rem; font-weight: bold; letter-spacing: 0.02em; }
+    .logo-text .a { color: var(--accent); }
+
+    nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+    nav a { text-decoration: none; color: var(--muted); font-family: 'Courier New', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    nav a:hover { color: var(--ink); }
+    .nav-btn { background: var(--ink) !important; color: var(--paper) !important; padding: 0.5rem 1.2rem; }
+    .nav-btn:hover { background: var(--accent) !important; }
+
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;​​​​​​​​​​​​​​​​
