@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodePeregrine LLC — Mobile App Development</title>
+  <title>CodePeregrine LLC — iOS App Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #0d0d0c;
-      --paper: #f4f1ec;
-      --warm: #faf9f6;
+      --ink: #0f0e0d;
+      --paper: #f5f2ed;
+      --warm: #faf8f5;
       --accent: #c8501a;
-      --muted: #7a7870;
-      --border: #ddd9d2;
-      --gap: clamp(3rem, 6vw, 6rem);
+      --muted: #8a8680;
+      --border: #e0dbd3;
+      --light-accent: #fdf0ea;
     }
 
     html { scroll-behavior: smooth; }
@@ -22,31 +24,477 @@
     body {
       background: var(--paper);
       color: var(--ink);
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: 'DM Sans', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem clamp(1.5rem, 6vw, 5rem);
-      background: rgba(244,241,236,0.92);
-      backdrop-filter: blur(12px);
+      padding: 1.2rem clamp(1.5rem, 6vw, 5rem);
+      background: rgba(245, 242, 237, 0.93);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
 
-    .logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
-    .logo svg { width: 28px; height: 28px; flex-shrink: 0; }
-    .logo-text { font-family: 'Courier New', monospace; font-size: 0.88rem; font-weight: bold; letter-spacing: 0.02em; }
-    .logo-text .a { color: var(--accent); }
+    .logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none; color: var(--ink);
+    }
 
-    nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
-    nav a { text-decoration: none; color: var(--muted); font-family: 'Courier New', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    nav a:hover { color: var(--ink); }
-    .nav-btn { background: var(--ink) !important; color: var(--paper) !important; padding: 0.5rem 1.2rem; }
-    .nav-btn:hover { background: var(--accent) !important; }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: var(--ink);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
 
+    .logo-icon svg { width: 18px; height: 18px; fill: var(--paper); }
+
+    .logo-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-name span { color: var(--accent); }
+
+    nav a.nav-contact {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 0.55rem 1.3rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a.nav-contact:hover { background: var(--accent); }
+
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;​​​​​​​​​​​​​​​​
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem clamp(1.5rem, 8vw, 8rem) 5rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%; height: 100%;
+      background: radial-gradient(ellipse at 80% 40%, rgba(200, 80, 26, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 16ch;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      color: var(--muted);
+      max-width: 44ch;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--ink);
+      color: var(--paper);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      transition: background 0.2s, gap 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--accent); gap: 1rem; }
+
+    .hero-cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── PLATFORM BADGE ── */
+    .platform-strip {
+      padding: 2.5rem clamp(1.5rem, 8vw, 8rem);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--warm);
+      flex-wrap: wrap;
+    }
+
+    .platform-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .platform-tags {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.74rem;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .tag svg { width: 14px; height: 14px; fill: var(--ink); }
+
+    /* ── WHAT I DO ── */
+    .section {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 8vw, 8rem);
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 3rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-card {
+      background: var(--paper);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+
+    .service-card:hover { background: var(--light-accent); }
+
+    .service-icon {
+      width: 44px; height: 44px;
+      background: var(--ink);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--paper); fill: none; stroke-width: 1.5; }
+
+    .service-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── TECH STACK ── */
+    .stack-section {
+      background: var(--ink);
+      color: var(--paper);
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 8vw, 8rem);
+    }
+
+    .stack-section .section-label { color: rgba(245,242,237,0.4); }
+    .stack-section .section-label::after { background: rgba(245,242,237,0.15); }
+
+    .stack-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.15;
+      max-width: 22ch;
+      margin-bottom: 3rem;
+    }
+
+    .stack-section h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .tech-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(245,242,237,0.2);
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      color: rgba(245,242,237,0.8);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tech-pill:hover { border-color: var(--accent); color: var(--paper); }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 8vw, 8rem);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-section h2 em { font-style: italic; color: var(--accent); }
+
+    .contact-section p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s;
+    }
+
+    .contact-email:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem clamp(1.5rem, 8vw, 8rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    .hero h1 { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav a.nav-contact { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5 4 9 8 10 4-1 8-5 8-10V6L12 2z"/></svg>
+      </div>
+      <span class="logo-name">Code<span>Peregrine</span></span>
+    </a>
+    <a href="mailto:codeperegrine@proton.me" class="nav-contact">Get in Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">iOS Development</p>
+    <h1>Custom iPhone &amp; iPad Apps, <em>built in Swift.</em></h1>
+    <p class="hero-sub">
+      Independent iOS developer crafting native Apple apps with SwiftUI.
+      From idea to App Store — clean code, thoughtful design.
+    </p>
+    <a href="mailto:codeperegrine@proton.me" class="hero-cta">
+      Start a project
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </section>
+
+  <!-- PLATFORM STRIP -->
+  <div class="platform-strip">
+    <span class="platform-label">Built for</span>
+    <div class="platform-tags">
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        iPhone
+      </span>
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="15" y2="22"/><line x1="12" y1="17" x2="12" y2="22"/></svg>
+        iPad
+      </span>
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        SwiftUI
+      </span>
+      <span class="tag">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        App Store
+      </span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section">
+    <p class="section-label">What I do</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>iPhone App Development</h3>
+        <p>Native iOS apps built with SwiftUI from the ground up. Smooth performance, intuitive interfaces, and Apple design standards.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg>
+        </div>
+        <h3>iPad App Development</h3>
+        <p>Apps designed to take full advantage of the iPad's larger canvas — split views, keyboard support, and multitasking built in.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Custom Features & Builds</h3>
+        <p>Have a specific idea? I work with you from concept through App Store submission — tailored to your needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="stack-section">
+    <p class="section-label">Tech stack</p>
+    <h2>Native Apple development, <em>no shortcuts.</em></h2>
+    <div class="tech-list">
+      <span class="tech-pill">Swift</span>
+      <span class="tech-pill">SwiftUI</span>
+      <span class="tech-pill">UIKit</span>
+      <span class="tech-pill">Xcode</span>
+      <span class="tech-pill">Core Data</span>
+      <span class="tech-pill">CloudKit</span>
+      <span class="tech-pill">StoreKit</span>
+      <span class="tech-pill">WidgetKit</span>
+      <span class="tech-pill">App Store Connect</span>
+      <span class="tech-pill">iOS 17+</span>
+      <span class="tech-pill">iPadOS 17+</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <h2>Have an app <em>in mind?</em></h2>
+    <p>Reach out and let's talk about your project.</p>
+    <a href="mailto:codeperegrine@proton.me" class="contact-email">
+      codeperegrine@proton.me
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 CodePeregrine LLC</p>
+    <p>iOS · SwiftUI</p>
+  </footer>
+
+</body>
+</html>
